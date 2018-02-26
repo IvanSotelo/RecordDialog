@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'android-maven'
 android {
     compileSdkVersion 26
 
@@ -33,4 +33,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:design:26.1.0'
     compile 'com.kailashdabhi:om-recorder:1.1.5'
+    apply plugin: 'com.github.dcendents.android-maven'
+    group = 'com.github.IvanSotelo'
 }

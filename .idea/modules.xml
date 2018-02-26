@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/RecordDialog.iml" filepath="$PROJECT_DIR$/RecordDialog.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/recorddialog/record_dialog.iml" filepath="$PROJECT_DIR$/recorddialog/record_dialog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recorddialog/recorddialog.iml" filepath="$PROJECT_DIR$/recorddialog/recorddialog.iml" />
     </modules>
   </component>
 </project>
