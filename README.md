@@ -1,6 +1,7 @@
 # RecordDialog
 A Simple Wav audio recorder dialog
 
+![Screen Shot](https://raw.githubusercontent.com/IvanSotelo/RecordDialog/master/20180226_122509.gif)
 ---
 
 ## Releases:
