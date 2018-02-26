@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
-apply plugin: 'android-maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
 android {
     compileSdkVersion 26
 
@@ -23,6 +24,9 @@ android {
     }
 
 }
+group = "com.ivansotelo"
+archivesBaseName = "RecordDialog"
+version = "1.0.0"  //customize this for new release
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -33,6 +37,92 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:design:26.1.0'
     compile 'com.kailashdabhi:om-recorder:1.1.5'
-    apply plugin: 'com.github.dcendents.android-maven'
-    group = 'com.github.IvanSotelo'
+}
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                groupId 'com.ivansotelo'
+                artifactId 'RecordDialog'
+
+                name 'RecordDialog'
+                description 'A Simple Wav audio recorder dialog'
+                url 'http://deskode.com'
+
+                licenses {
+                    license {
+                        name 'MIT'
+                        url 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'ivansotelo'
+                        name 'Ivan Sotelo'
+                        email 'ivan_sotelo@deskode.com'
+                    }
+                }
+                scm {
+                    connection 'https://github.com/IvanSotelo/RecordDialog.git'
+                    developerConnection 'https://github.com/IvanSotelo/RecordDialog.git'
+                    url 'http://deskode.com'
+
+                }
+            }
+        }
+    }
+}
+
+
+if (project.hasProperty("android")) {
+    // deploy aar
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.srcDirs
+    }
+
+    task javadoc(type: Javadoc) {
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+} else {
+    // deploy jars only
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+// Bintray
+bintray {
+    user = 'ivansotelo'
+    key = 'bb70f03d9b1dd1d047e7e05599650d1f4a96bdfd'
+
+    configurations = ['archives']
+    pkg {
+        repo = 'RecordDialog'
+        name = 'RecordDialog'
+        desc = 'A Simple Wav audio recorder dialog'
+        websiteUrl = 'http://deskode.com'
+        vcsUrl = 'https://github.com/IvanSotelo/RecordDialog.git'
+        licenses = ["MIT"]
+        publish = true
+        publicDownloadNumbers = true
+        version {
+            name = '1.0.0'
+            desc = 'A Simple Wav audio recorder dialog '
+        }
+    }
 }
