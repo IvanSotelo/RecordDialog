@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
                 recordDialog.setPositiveButton("Guardar", new RecordDialog.ClickListener() {
                     @Override
                     public void OnClickListener(String path) {
-                        Toast.makeText(MainActivity.this,"Save audio: "+path, Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this,"Save audio: " + path, Toast.LENGTH_LONG).show();
                     }
                 });
             }

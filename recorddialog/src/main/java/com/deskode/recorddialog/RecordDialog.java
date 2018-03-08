@@ -122,10 +122,12 @@ public class RecordDialog extends DialogFragment {
         alertDialog.setPositiveButton(strPositiveButton, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                try {
-                    recorder.stopRecording();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (STATE_BUTTON.equals("RECORD")){
+                    try {
+                        recorder.stopRecording();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
                 _clickListener.OnClickListener(_AudioSavePathInDevice);
             }
