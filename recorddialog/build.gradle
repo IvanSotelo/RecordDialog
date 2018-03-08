@@ -10,7 +10,7 @@ android {
         minSdkVersion 18
         targetSdkVersion 26
         versionCode 2
-        versionName "1.0.2"
+        versionName "1.1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -27,7 +27,7 @@ android {
 }
 group = "com.ivansotelo"
 archivesBaseName = "RecordDialog"
-version = "1.0.2"  //customize this for new release
+version = "1.1.0"  //customize this for new release
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

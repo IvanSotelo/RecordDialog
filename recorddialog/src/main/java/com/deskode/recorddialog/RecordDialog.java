@@ -43,6 +43,7 @@ public class RecordDialog extends DialogFragment {
     private ClickListener _clickListener;
     Recorder recorder;
     MediaPlayer mediaPlayer;
+    MediaPlayer mPlayer;
 
     public RecordDialog() {
 
@@ -88,7 +89,14 @@ public class RecordDialog extends DialogFragment {
                         _recordButton.setImageResource(R.drawable.ic_stop);
                         STATE_BUTTON = "RECORD";
                         try {
-                            recorder.startRecording();
+                            mPlayer = MediaPlayer.create(getContext(), R.raw.hangouts_message);
+                            mPlayer.start();
+                            mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mp) {
+                                    recorder.startRecording();
+                                }
+                            });
                         } catch (IllegalStateException e) {
                             e.printStackTrace();
                         }
@@ -96,6 +104,8 @@ public class RecordDialog extends DialogFragment {
                     case "RECORD":
                         try {
                             recorder.stopRecording();
+                            mPlayer = MediaPlayer.create(getContext(), R.raw.pop);
+                            mPlayer.start();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
