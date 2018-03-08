@@ -12,7 +12,7 @@ A Simple Wav audio recorder dialog
 
 ## Releases:
 
-#### Current release: 1.0.0.
+#### Current release: 1.0.1.
 
 You can see all the library releases [here](https://github.com/IvanSotelo/RecordDialog/releases).
 
@@ -43,7 +43,7 @@ allprojects {
 Now add the dependency to your app build.gradle file:
 
 ```groovy
-compile 'com.github.IvanSotelo:RecordDialog:1.0.0'
+compile 'com.github.IvanSotelo:RecordDialog:1.0.1'
 ```
 
 ### Creating the dialog with Java
@@ -51,15 +51,15 @@ compile 'com.github.IvanSotelo:RecordDialog:1.0.0'
 Here is a complete snippet of it usage:
 
 ```java
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.show).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recordDialog = RecordDialog.newInstance(R.string.app_name);
+                recordDialog = RecordDialog.newInstance("Grabar Audio de Complemento");
                 recordDialog.show(MainActivity.this.getFragmentManager(),"TAG");
-                recordDialog.setPositiveButton(android.R.string.save, new DialogInterface.OnClickListener() {
+                recordDialog.setPositiveButton("Guardar", new RecordDialog.ClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MainActivity.this,"Save audio: "+recordDialog.getAudioPath(), Toast.LENGTH_LONG).show();
+                    public void OnClickListener(String path) {
+                        Toast.makeText(MainActivity.this,"Save audio: "+path, Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -70,7 +70,7 @@ Here is a complete snippet of it usage:
 --------
 #### Gradle
 ```groovy
-compile 'com.ivansotelo.RecordDialog:1.0.0'
+compile 'com.ivansotelo.RecordDialog:1.0.1'
 ```
 
 ##### Maven
@@ -78,7 +78,7 @@ compile 'com.ivansotelo.RecordDialog:1.0.0'
 <dependency>
   <groupId>com.ivansotelo</groupId>
   <artifactId>RecordDialog</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <type>aar</type>
 </dependency>
 ```
