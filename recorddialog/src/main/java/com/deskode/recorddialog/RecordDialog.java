@@ -37,10 +37,10 @@ import omrecorder.Recorder;
 public class RecordDialog extends DialogFragment {
     private String _strTitle;
     private String _strPositiveButtonText;
-    private DialogInterface.OnClickListener _onClickListener;
     private FloatingActionButton _recordButton;
     private String STATE_BUTTON = "INIT";
     private String _AudioSavePathInDevice = null;
+    private ClickListener _clickListener;
     Recorder recorder;
     MediaPlayer mediaPlayer;
 
@@ -119,7 +119,17 @@ public class RecordDialog extends DialogFragment {
         alertDialog.setView(rootView);
 
         String strPositiveButton = _strPositiveButtonText == null ? "CLOSE" : _strPositiveButtonText;
-        alertDialog.setPositiveButton(strPositiveButton, _onClickListener);
+        alertDialog.setPositiveButton(strPositiveButton, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    recorder.stopRecording();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                _clickListener.OnClickListener(_AudioSavePathInDevice);
+            }
+        });
 
         String strTitle = _strTitle == null ? "Grabar audio" : _strTitle;
         alertDialog.setTitle(strTitle);
@@ -137,9 +147,9 @@ public class RecordDialog extends DialogFragment {
         _strTitle = strTitle;
     }
 
-    public void setPositiveButton(String strPositiveButtonText, DialogInterface.OnClickListener onClickListener) {
+    public void setPositiveButton(String strPositiveButtonText, ClickListener onClickListener) {
         _strPositiveButtonText = strPositiveButtonText;
-        _onClickListener = onClickListener;
+        _clickListener = onClickListener;
     }
 
     private void setupRecorder() {
@@ -249,5 +259,10 @@ public class RecordDialog extends DialogFragment {
     public void onPause() {
         super.onPause();
         dismiss();
+    }
+
+    public interface ClickListener
+    {
+        void OnClickListener(String path);
     }
 }
