@@ -1,8 +1,10 @@
 # RecordDialog <a href="https://github.com/IvanSotelo/RecordDialog#how-to-include"><img src="https://jitpack.io/v/IvanSotelo/RecordDialog.svg"></a>
+
   <a target="_blank" href="https://android-arsenal.com/api?level=18"><img src="https://img.shields.io/badge/API-18%2B-brightgreen.svg"></a>
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-RecordDialog-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6797) 
   <a target="_blank" href="https://travis-ci.org/IvanSotelo/RecordDialog"><img src="https://travis-ci.org/IvanSotelo/RecordDialog.svg?branch=master"></a>
   <a target="_blank" href="https://www.paypal.me/IvanSotelo" title="Donate using PayPal"><img src="https://img.shields.io/badge/paypal-donate-brightgreen.svg" /></a>
+
 A Simple Wav audio recorder dialog
 
 ![Screen Shot](https://raw.githubusercontent.com/IvanSotelo/RecordDialog/master/20180226_122509.gif)
