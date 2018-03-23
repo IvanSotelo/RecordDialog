@@ -43,7 +43,7 @@ allprojects {
 Now add the dependency to your app build.gradle file:
 
 ```groovy
-compile 'com.github.IvanSotelo:RecordDialog:1.1.0'
+compile 'com.github.IvanSotelo:RecordDialog:1.2.0'
 ```
 
 ### Creating the dialog with Java
@@ -71,7 +71,7 @@ Here is a complete snippet of it usage:
 --------
 #### Gradle
 ```groovy
-compile 'com.ivansotelo.RecordDialog:1.1.0'
+compile 'com.ivansotelo.RecordDialog:1.2.0'
 ```
 
 ##### Maven
@@ -79,7 +79,7 @@ compile 'com.ivansotelo.RecordDialog:1.1.0'
 <dependency>
   <groupId>com.ivansotelo</groupId>
   <artifactId>RecordDialog</artifactId>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
   <type>aar</type>
 </dependency>
 ```
