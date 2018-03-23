@@ -89,7 +89,7 @@ public class RecordDialog extends DialogFragment {
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         View rootView = inflater.inflate(R.layout.record_dialog, null);
         String strMessage = _strMessage == null ? "Presiona para grabar" : _strMessage;
-        _timerView = rootView.findViewById(R.id.txtTimer);
+        _timerView = rootView.findViewById(R.id._txtTimer);
         _timerView.setText(strMessage);
         _recordButton = rootView.findViewById(R.id.btnRecord);
         _recordButton.setOnClickListener(new View.OnClickListener() {
