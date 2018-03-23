@@ -12,7 +12,7 @@ A Simple Wav audio recorder dialog
 
 ## Releases:
 
-#### Current release: 1.2.0.
+#### Current release: 1.2.1.
 
 You can see all the library releases [here](https://github.com/IvanSotelo/RecordDialog/releases).
 
@@ -43,7 +43,7 @@ allprojects {
 Now add the dependency to your app build.gradle file:
 
 ```groovy
-compile 'com.github.IvanSotelo:RecordDialog:1.2.0'
+compile 'com.github.IvanSotelo:RecordDialog:1.2.1'
 ```
 
 ### Creating the dialog with Java
@@ -71,7 +71,7 @@ Here is a complete snippet of it usage:
 --------
 #### Gradle
 ```groovy
-compile 'com.ivansotelo.RecordDialog:1.2.0'
+compile 'com.ivansotelo.RecordDialog:1.2.1'
 ```
 
 ##### Maven
@@ -79,7 +79,7 @@ compile 'com.ivansotelo.RecordDialog:1.2.0'
 <dependency>
   <groupId>com.ivansotelo</groupId>
   <artifactId>RecordDialog</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
   <type>aar</type>
 </dependency>
 ```

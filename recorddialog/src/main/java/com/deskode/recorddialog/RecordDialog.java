@@ -45,7 +45,7 @@ public class RecordDialog extends DialogFragment {
     private String STATE_BUTTON = "INIT";
     private String _AudioSavePathInDevice = null;
     private TextView _timerView;
-    private Timer timer;
+    private Timer _timer;
     private int recorderSecondsElapsed;
     private int playerSecondsElapsed;
 
@@ -89,7 +89,7 @@ public class RecordDialog extends DialogFragment {
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         View rootView = inflater.inflate(R.layout.record_dialog, null);
         String strMessage = _strMessage == null ? "Presiona para grabar" : _strMessage;
-        _timerView = rootView.findViewById(R.id.timer);
+        _timerView = rootView.findViewById(R.id.txtTimer);
         _timerView.setText(strMessage);
         _recordButton = rootView.findViewById(R.id.btnRecord);
         _recordButton.setOnClickListener(new View.OnClickListener() {
@@ -264,8 +264,8 @@ public class RecordDialog extends DialogFragment {
 
     private void startTimer(){
         stopTimer();
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
+        _timer = new Timer();
+        _timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 updateTimer();
@@ -274,10 +274,10 @@ public class RecordDialog extends DialogFragment {
     }
 
     private void stopTimer(){
-        if (timer != null) {
-            timer.cancel();
-            timer.purge();
-            timer = null;
+        if (_timer != null) {
+            _timer.cancel();
+            _timer.purge();
+            _timer = null;
         }
     }
 
