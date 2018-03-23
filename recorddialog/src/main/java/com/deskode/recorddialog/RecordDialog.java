@@ -150,6 +150,7 @@ public class RecordDialog extends DialogFragment {
                 if (STATE_BUTTON.equals("RECORD")){
                     try {
                         recorder.stopRecording();
+                        stopTimer();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -282,6 +283,10 @@ public class RecordDialog extends DialogFragment {
     }
 
     private void updateTimer() {
+        // here you check the value of getActivity() and break up if needed
+        if(getActivity() == null)
+            return;
+
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
