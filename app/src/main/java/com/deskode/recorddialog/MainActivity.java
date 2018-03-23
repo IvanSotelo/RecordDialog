@@ -15,9 +15,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.show).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recordDialog = RecordDialog.newInstance("Grabar Audio de Complemento");
+                recordDialog = RecordDialog.newInstance("Record Audio");
+                recordDialog.setMessage("Press for record");
                 recordDialog.show(MainActivity.this.getFragmentManager(),"TAG");
-                recordDialog.setPositiveButton("Guardar", new RecordDialog.ClickListener() {
+                recordDialog.setPositiveButton("Save", new RecordDialog.ClickListener() {
                     @Override
                     public void OnClickListener(String path) {
                         Toast.makeText(MainActivity.this,"Save audio: " + path, Toast.LENGTH_LONG).show();

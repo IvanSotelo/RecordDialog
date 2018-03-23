@@ -21,11 +21,14 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import omrecorder.AudioChunk;
 import omrecorder.AudioRecordConfig;
@@ -36,10 +39,16 @@ import omrecorder.Recorder;
 
 public class RecordDialog extends DialogFragment {
     private String _strTitle;
+    private String _strMessage;
     private String _strPositiveButtonText;
     private FloatingActionButton _recordButton;
     private String STATE_BUTTON = "INIT";
     private String _AudioSavePathInDevice = null;
+    private TextView _timerView;
+    private Timer timer;
+    private int recorderSecondsElapsed;
+    private int playerSecondsElapsed;
+
     private ClickListener _clickListener;
     Recorder recorder;
     MediaPlayer mediaPlayer;
@@ -79,6 +88,9 @@ public class RecordDialog extends DialogFragment {
         // Getting the layout inflater to inflate the view in an alert dialog.
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         View rootView = inflater.inflate(R.layout.record_dialog, null);
+        String strMessage = _strMessage == null ? "Presiona para grabar" : _strMessage;
+        _timerView = rootView.findViewById(R.id.timer);
+        _timerView.setText(strMessage);
         _recordButton = rootView.findViewById(R.id.btnRecord);
         _recordButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +107,7 @@ public class RecordDialog extends DialogFragment {
                                 @Override
                                 public void onCompletion(MediaPlayer mp) {
                                     recorder.startRecording();
+                                    startTimer();
                                 }
                             });
                         } catch (IllegalStateException e) {
@@ -111,6 +124,8 @@ public class RecordDialog extends DialogFragment {
                         }
                         _recordButton.setImageResource(R.drawable.ic_play);
                         STATE_BUTTON = "STOP";
+                        _timerView.setText("00:00:00");
+                        recorderSecondsElapsed = 0;
                         break;
                     case "STOP":
                         startMediaPlayer();
@@ -146,6 +161,9 @@ public class RecordDialog extends DialogFragment {
         String strTitle = _strTitle == null ? "Grabar audio" : _strTitle;
         alertDialog.setTitle(strTitle);
 
+        recorderSecondsElapsed = 0;
+        playerSecondsElapsed = 0;
+
         final AlertDialog dialog = alertDialog.create();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams
                 .SOFT_INPUT_STATE_HIDDEN);
@@ -157,6 +175,10 @@ public class RecordDialog extends DialogFragment {
 
     public void setTitle(String strTitle) {
         _strTitle = strTitle;
+    }
+
+    public void setMessage(String strMessage) {
+        _strMessage = strMessage;
     }
 
     public void setPositiveButton(String strPositiveButtonText, ClickListener onClickListener) {
@@ -210,6 +232,8 @@ public class RecordDialog extends DialogFragment {
         }
         _recordButton.setImageResource(R.drawable.ic_pause);
         STATE_BUTTON = "PLAY";
+        playerSecondsElapsed = 0;
+        startTimer();
         mediaPlayer.start();
     }
 
@@ -233,7 +257,43 @@ public class RecordDialog extends DialogFragment {
             mediaPlayer = null;
             _recordButton.setImageResource(R.drawable.ic_play);
             STATE_BUTTON = "STOP";
+            _timerView.setText("00:00:00");
+            stopTimer();
         }
+    }
+
+    private void startTimer(){
+        stopTimer();
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                updateTimer();
+            }
+        }, 0, 1000);
+    }
+
+    private void stopTimer(){
+        if (timer != null) {
+            timer.cancel();
+            timer.purge();
+            timer = null;
+        }
+    }
+
+    private void updateTimer() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(STATE_BUTTON.equals("RECORD")) {
+                    recorderSecondsElapsed++;
+                    _timerView.setText(Util.formatSeconds(recorderSecondsElapsed));
+                } else if(STATE_BUTTON.equals("PLAY")){
+                    playerSecondsElapsed++;
+                    _timerView.setText(Util.formatSeconds(playerSecondsElapsed));
+                }
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)

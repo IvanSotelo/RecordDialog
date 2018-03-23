@@ -15,11 +15,19 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/btnRecord"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="86dp"
+            android:layout_height="86dp"
             android:src="@drawable/ic_mic"
             app:fabSize="normal"
             app:rippleColor="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Presiona para grabar"
+            android:textSize="24sp" />
 
     </LinearLayout>
 
