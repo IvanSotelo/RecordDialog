@@ -7,7 +7,7 @@
 
 A Simple Wav audio recorder dialog
 
-![Screen Shot](https://raw.githubusercontent.com/IvanSotelo/RecordDialog/master/20180226_122509.gif)
+![Screen Shot](https://raw.githubusercontent.com/IvanSotelo/RecordDialog/master/20180521_093731.gif)
 ---
 
 ## Releases:
